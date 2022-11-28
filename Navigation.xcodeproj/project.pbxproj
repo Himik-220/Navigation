@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DCB35E429354C4F00390046 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB35E329354C4F00390046 /* ProfileViewController.swift */; };
+		7DCB35E629354F6400390046 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB35E529354F6400390046 /* PostViewController.swift */; };
 		7DCE709B2930303E0081D98E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE709A2930303E0081D98E /* AppDelegate.swift */; };
 		7DCE709D2930303E0081D98E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE709C2930303E0081D98E /* SceneDelegate.swift */; };
-		7DCE709F2930303E0081D98E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE709E2930303E0081D98E /* ViewController.swift */; };
+		7DCE709F2930303E0081D98E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE709E2930303E0081D98E /* FeedViewController.swift */; };
 		7DCE70A42930303F0081D98E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DCE70A32930303F0081D98E /* Assets.xcassets */; };
 		7DCE70A72930303F0081D98E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DCE70A52930303F0081D98E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7DCB35E329354C4F00390046 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7DCB35E529354F6400390046 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		7DCE70972930303E0081D98E /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DCE709A2930303E0081D98E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DCE709C2930303E0081D98E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7DCE709E2930303E0081D98E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7DCE709E2930303E0081D98E /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		7DCE70A32930303F0081D98E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DCE70A62930303F0081D98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DCE70A82930303F0081D98E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,7 +60,9 @@
 			children = (
 				7DCE709A2930303E0081D98E /* AppDelegate.swift */,
 				7DCE709C2930303E0081D98E /* SceneDelegate.swift */,
-				7DCE709E2930303E0081D98E /* ViewController.swift */,
+				7DCE709E2930303E0081D98E /* FeedViewController.swift */,
+				7DCB35E329354C4F00390046 /* ProfileViewController.swift */,
+				7DCB35E529354F6400390046 /* PostViewController.swift */,
 				7DCE70A32930303F0081D98E /* Assets.xcassets */,
 				7DCE70A52930303F0081D98E /* LaunchScreen.storyboard */,
 				7DCE70A82930303F0081D98E /* Info.plist */,
@@ -134,9 +140,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DCE709F2930303E0081D98E /* ViewController.swift in Sources */,
+				7DCE709F2930303E0081D98E /* FeedViewController.swift in Sources */,
 				7DCE709B2930303E0081D98E /* AppDelegate.swift in Sources */,
+				7DCB35E429354C4F00390046 /* ProfileViewController.swift in Sources */,
 				7DCE709D2930303E0081D98E /* SceneDelegate.swift in Sources */,
+				7DCB35E629354F6400390046 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
