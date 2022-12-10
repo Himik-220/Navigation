@@ -28,8 +28,9 @@ class ProfileViewController: UIViewController {
   }
   
   override func viewDidLayoutSubviews() {
-    NSLayoutConstraint.activate([someButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-                                 someButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-                                 someButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)])
+    NSLayoutConstraint.activate([
+      someButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+      someButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+      someButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)])
   }
 }
