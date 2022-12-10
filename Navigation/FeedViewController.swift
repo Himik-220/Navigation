@@ -13,7 +13,7 @@ class FeedViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .green
+    view.backgroundColor = .white
     myButton.setTitle("Post", for: .normal)
     myButton.setTitleColor(.black, for: .normal)
     myButton.backgroundColor = .systemBlue

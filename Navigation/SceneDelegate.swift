@@ -60,7 +60,7 @@ func createFeedNavigationController() -> UINavigationController {
   return nvc
 }
 
-func createProfileViewController() -> UINavigationController {
+func createProfileNavigationViewController() -> UINavigationController {
   let nvc = UINavigationController(rootViewController: ProfileViewController())
   nvc.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
   return nvc
@@ -68,6 +68,6 @@ func createProfileViewController() -> UINavigationController {
 
 func createTabBarController() -> UITabBarController {
   let tabBar = UITabBarController()
-  tabBar.viewControllers = [createFeedNavigationController(), createProfileViewController()]
+  tabBar.viewControllers = [createFeedNavigationController(), createProfileNavigationViewController()]
   return tabBar
 }
