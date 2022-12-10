@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-
+  
   var avatar: UIImageView = {
     let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
     image.contentMode = .scaleToFill
@@ -58,31 +58,42 @@ class ProfileHeaderView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
+    self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(avatar)
     self.addSubview(nameLabel)
     self.addSubview(statusButton)
     self.addSubview(signatureLabel)
   }
-
+  
   override func layoutSubviews() {
     super.layoutSubviews()
     if let strongSuperView = self.superview {
-      self.frame = strongSuperView.frame
+      NSLayoutConstraint.activate([
+        self.heightAnchor.constraint(equalToConstant: 220),
+        self.leftAnchor.constraint(equalTo: strongSuperView.leftAnchor, constant: 0),
+        self.rightAnchor.constraint(equalTo: strongSuperView.rightAnchor, constant: 0),
+        self.topAnchor.constraint(equalTo: strongSuperView.safeAreaLayoutGuide.topAnchor, constant: 0),
+        
+        avatar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
+        avatar.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
+        avatar.widthAnchor.constraint(equalToConstant: 150),
+        avatar.heightAnchor.constraint(equalToConstant: 150),
+        
+        nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+        nameLabel.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),
+        
+        statusButton.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16),
+        statusButton.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
+        statusButton.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -16),
+        statusButton.heightAnchor.constraint(equalToConstant: 50),
+        
+        signatureLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+        signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor)])
+    } else {
+      print("not superview")
     }
-    NSLayoutConstraint.activate([avatar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
-                                 avatar.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
-                                 avatar.widthAnchor.constraint(equalToConstant: 150),
-                                 avatar.heightAnchor.constraint(equalToConstant: 150)])
-    NSLayoutConstraint.activate([nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-                                 nameLabel.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20)])
-    NSLayoutConstraint.activate([statusButton.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16),
-                                 statusButton.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
-                                 statusButton.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -16),
-                                 statusButton.heightAnchor.constraint(equalToConstant: 50)])
-    NSLayoutConstraint.activate([signatureLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-                                 signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor)])
   }
-
+  
   @objc func showStatus() {
     print(signatureLabel.text ?? "")
   }
