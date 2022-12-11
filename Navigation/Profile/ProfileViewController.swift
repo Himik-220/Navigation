@@ -22,15 +22,21 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.title = "Profile"
-    view.backgroundColor = .lightGray
+    view.backgroundColor = .systemGray6
     view.addSubview(header)
     view.addSubview(someButton)
+    header.statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
   }
   
   override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     NSLayoutConstraint.activate([
       someButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
       someButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
       someButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)])
+  }
+  
+  @objc func showStatus() {
+    print(header.signatureLabel.text ?? "")
   }
 }
