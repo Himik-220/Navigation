@@ -27,6 +27,7 @@ class LogInUIScrollView: UIScrollView {
     tf.translatesAutoresizingMaskIntoConstraints = false
     tf.layer.borderWidth = 0.5
     tf.layer.borderColor = UIColor.lightGray.cgColor
+    tf.indent(size: 5)
     return tf
   }()
   
@@ -38,6 +39,7 @@ class LogInUIScrollView: UIScrollView {
     tf.font = UIFont(name: "System", size: 16)
     tf.backgroundColor = .systemGray6
     tf.translatesAutoresizingMaskIntoConstraints = false
+    tf.indent(size: 5)
     return tf
   }()
   
