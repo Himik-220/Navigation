@@ -10,12 +10,12 @@ import UIKit
 class ProfileHeaderView: UIView {
   
   var avatar: UIImageView = {
-    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+    let image = UIImageView()
     image.contentMode = .scaleToFill
     image.translatesAutoresizingMaskIntoConstraints = false
     image.layer.borderWidth = 3
     image.layer.borderColor = UIColor.white.cgColor
-    image.layer.cornerRadius = image.frame.size.width / 2
+    image.layer.cornerRadius = 150/2
     image.clipsToBounds = true
     image.image = UIImage(named: "avatar")
     return image
@@ -57,7 +57,6 @@ class ProfileHeaderView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
     self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(avatar)
     self.addSubview(nameLabel)
@@ -92,10 +91,6 @@ class ProfileHeaderView: UIView {
     } else {
       print("not superview")
     }
-  }
-  
-  @objc func showStatus() {
-    print(signatureLabel.text ?? "")
   }
   
   required init?(coder: NSCoder) {
