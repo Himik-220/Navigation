@@ -60,14 +60,15 @@ func createFeedNavigationController() -> UINavigationController {
   return nvc
 }
 
-func createProfileNavigationViewController() -> UINavigationController {
-  let nvc = UINavigationController(rootViewController: ProfileViewController())
+func createLogInNavigationViewController() -> UINavigationController {
+  let nvc = UINavigationController(rootViewController: LogInViewController())
   nvc.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+  nvc.navigationBar.isHidden = true
   return nvc
 }
 
 func createTabBarController() -> UITabBarController {
   let tabBar = UITabBarController()
-  tabBar.viewControllers = [createFeedNavigationController(), createProfileNavigationViewController()]
+  tabBar.viewControllers = [createFeedNavigationController(), createLogInNavigationViewController()]
   return tabBar
 }
