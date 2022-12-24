@@ -48,7 +48,7 @@ class PostTableViewCell: UITableViewCell {
     return label
   }()
   
-  let image = UIImageView(image: UIImage(named: ""))
+  let image = UIImageView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,9 +57,11 @@ class PostTableViewCell: UITableViewCell {
     contentView.addSubview(likesLabel)
     contentView.addSubview(viewsLabel)
     contentView.addSubview(image)
+    
     image.contentMode = .scaleAspectFit
     image.translatesAutoresizingMaskIntoConstraints = false
     image.backgroundColor = .black
+    
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
       authorLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
@@ -93,7 +95,6 @@ class PostTableViewCell: UITableViewCell {
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    
     // Configure the view for the selected state
   }
 }
