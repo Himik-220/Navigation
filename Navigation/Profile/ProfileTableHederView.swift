@@ -74,7 +74,6 @@ class ProfileTableHederView: UIView {
     super.layoutSubviews()
     if let strongSuperview = superview {
       NSLayoutConstraint.activate([
-        self.heightAnchor.constraint(equalToConstant: 220),
         self.widthAnchor.constraint(equalTo: strongSuperview.safeAreaLayoutGuide.widthAnchor),
         self.centerXAnchor.constraint(equalTo: strongSuperview.centerXAnchor),
         self.topAnchor.constraint(equalTo: strongSuperview.topAnchor),
@@ -91,10 +90,10 @@ class ProfileTableHederView: UIView {
         statusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
         statusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
         statusButton.heightAnchor.constraint(equalToConstant: 50),
+        statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
         
         signatureLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
         signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor)])
-      
     } else {
       print("Not superview")
     }
