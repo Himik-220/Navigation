@@ -9,6 +9,13 @@ import UIKit
 
 class ProfileTableHederView: UIView {
   
+  var widthAvatarConstraint: NSLayoutConstraint!
+  var heightAvatarConstraint: NSLayoutConstraint!
+  var topAvatarConstraint: NSLayoutConstraint!
+  var leftAvatarConstraint: NSLayoutConstraint!
+  var centerYAvatarConstraint: NSLayoutConstraint!
+  var centerXAvatarConstraint: NSLayoutConstraint!
+  
   var avatar: UIImageView = {
     let image = UIImageView()
     image.contentMode = .scaleToFill
@@ -55,6 +62,22 @@ class ProfileTableHederView: UIView {
     return label
   }()
   
+  var exitButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(systemName: "clear.fill"), for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.alpha = 0
+    return button
+  }()
+  
+  var bottomAvatarView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .systemGray6
+    view.alpha = 0
+    return view
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
@@ -64,10 +87,58 @@ class ProfileTableHederView: UIView {
     self.addSubview(signatureLabel)
     self.backgroundColor = .systemGray6
     statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
+    avatar.isUserInteractionEnabled = true
+    self.avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
+    statusButton.addSubview(bottomAvatarView)
+    self.addSubview(exitButton)
+    exitButton.addTarget(self, action: #selector(exit), for: .touchUpInside)
+    
+    widthAvatarConstraint = avatar.widthAnchor.constraint(equalToConstant: 150)
+    widthAvatarConstraint.isActive = true
+    heightAvatarConstraint = avatar.heightAnchor.constraint(equalToConstant: 150)
+    heightAvatarConstraint.isActive = true
+    topAvatarConstraint = avatar.topAnchor.constraint(equalTo: self.topAnchor)
+    leftAvatarConstraint = avatar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16)
+    topAvatarConstraint.isActive = true
+    leftAvatarConstraint.isActive = true
+    centerXAvatarConstraint = avatar.centerXAnchor.constraint(equalTo: self.centerXAnchor)
   }
   
   @objc func showStatus() {
     print(signatureLabel.text ?? "")
+  }
+  
+  @objc func exit() {
+    widthAvatarConstraint.constant = 150
+    heightAvatarConstraint.constant = 150
+    centerYAvatarConstraint.isActive = false
+    centerXAvatarConstraint.isActive = false
+    topAvatarConstraint.isActive = true
+    leftAvatarConstraint.isActive = true
+    UIView.animate(withDuration: 0.5) {
+      self.layoutIfNeeded()
+      self.bottomAvatarView.alpha = 0
+    }
+    UIView.animate(withDuration: 0.3, delay: 0.5){
+      self.exitButton.alpha = 0
+    }
+  }
+  
+  @objc func onTap(_ tapRecognizer: UITapGestureRecognizer) {
+    widthAvatarConstraint.constant = UIScreen.main.bounds.width
+    heightAvatarConstraint.constant = UIScreen.main.bounds.width
+    centerYAvatarConstraint = avatar.centerYAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.centerYAnchor)
+    topAvatarConstraint.isActive = false
+    leftAvatarConstraint.isActive = false
+    centerYAvatarConstraint.isActive = true
+    centerXAvatarConstraint.isActive = true
+    UIView.animate(withDuration: 0.5) {
+      self.layoutIfNeeded()
+      self.bottomAvatarView.alpha = 0.8
+    }
+    UIView.animate(withDuration: 0.3, delay: 0.5){
+      self.exitButton.alpha = 1
+    }
   }
   
   override func layoutSubviews() {
@@ -77,11 +148,6 @@ class ProfileTableHederView: UIView {
         self.widthAnchor.constraint(equalTo: strongSuperview.safeAreaLayoutGuide.widthAnchor),
         self.centerXAnchor.constraint(equalTo: strongSuperview.centerXAnchor),
         self.topAnchor.constraint(equalTo: strongSuperview.topAnchor),
-        
-        avatar.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-        avatar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-        avatar.widthAnchor.constraint(equalToConstant: 150),
-        avatar.heightAnchor.constraint(equalToConstant: 150),
         
         nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
         nameLabel.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),
@@ -93,7 +159,15 @@ class ProfileTableHederView: UIView {
         statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
         
         signatureLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-        signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor)])
+        signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
+        
+        bottomAvatarView.topAnchor.constraint(equalTo: avatar.bottomAnchor),
+        bottomAvatarView.centerXAnchor.constraint(equalTo: avatar.centerXAnchor),
+        bottomAvatarView.bottomAnchor.constraint(equalTo: strongSuperview.safeAreaLayoutGuide.bottomAnchor),
+        bottomAvatarView.widthAnchor.constraint(equalTo: avatar.widthAnchor),
+      
+        exitButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+        exitButton.rightAnchor.constraint(equalTo: avatar.rightAnchor, constant: -12)])
     } else {
       print("Not superview")
     }
