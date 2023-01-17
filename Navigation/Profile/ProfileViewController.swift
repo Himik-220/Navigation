@@ -10,8 +10,6 @@ import UIKit
 class ProfileViewController: UIViewController {
   
   let tableView = UITableView()
-  let profileTableHeaderView = ProfileTableHederView()
-  var isBig = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +22,6 @@ class ProfileViewController: UIViewController {
     self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.cellID)
     self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.cellID)
     self.tableView.rowHeight = UITableView.automaticDimension
-//    self.profileTableHeaderView.avatar.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(tapAvatar)))
   }
   
   override func viewDidLayoutSubviews() {
@@ -36,18 +33,6 @@ class ProfileViewController: UIViewController {
       tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
-  
-//  @objc func tapAvatar() {
-//    if isBig{
-//      profileTableHeaderView.widthAvatarConstraint = 150.0
-//    } else {
-//      profileTableHeaderView.widthAvatarConstraint = 500.0
-//    }
-//    isBig.toggle()
-//    UIView.animate(withDuration: 0.5, delay: 0) {
-//      self.view.layoutIfNeeded()
-//    }
-//  }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -81,7 +66,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     if section == 0 {
-      return profileTableHeaderView
+      return ProfileTableHederView()
     } else {
       return nil
     }
