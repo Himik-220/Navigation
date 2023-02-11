@@ -16,7 +16,7 @@ class InfoViewController: UIViewController {
     
     view.backgroundColor = .gray
     myBytton.setTitle("alert", for: .normal)
-    myBytton.setTitleColor(.black, for: .normal)
+    myBytton.setTitleColor(UIColor(named: "textColor"), for: .normal)
     myBytton.backgroundColor = .red
     view.addSubview(myBytton)
     myBytton.addTarget(self, action: #selector(goAlert), for: .touchUpInside)

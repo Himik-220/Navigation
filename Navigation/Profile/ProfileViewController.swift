@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
   
   let tableView = UITableView()
   
@@ -22,6 +22,10 @@ class ProfileViewController: UIViewController {
     self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.cellID)
     self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.cellID)
     self.tableView.rowHeight = UITableView.automaticDimension
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
+    swipeDown.delegate = self
+    swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
+    self.tableView.addGestureRecognizer(swipeDown)
   }
   
   override func viewDidLayoutSubviews() {
@@ -32,6 +36,19 @@ class ProfileViewController: UIViewController {
       tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
       tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    view.endEditing(true)
+    return false
+  }
+  
+  @objc func hideKeyboardOnSwipeDown() {
+    view.endEditing(true)
+  }
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
 }
 
@@ -88,4 +105,3 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
   }
 }
-

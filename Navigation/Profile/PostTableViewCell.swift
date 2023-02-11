@@ -15,7 +15,7 @@ class PostTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 2
     label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -34,7 +34,7 @@ class PostTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 1
     label.font = UIFont(name: "System", size: 16)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -43,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 1
     label.font = UIFont(name: "System", size: 16)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -60,7 +60,9 @@ class PostTableViewCell: UITableViewCell {
     
     image.contentMode = .scaleAspectFit
     image.translatesAutoresizingMaskIntoConstraints = false
-    image.backgroundColor = .black
+    image.backgroundColor = UIColor(named: "textColor")
+    
+    likesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
     
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -84,17 +86,19 @@ class PostTableViewCell: UITableViewCell {
     ])
   }
   
+  @objc func onTap() {
+    print("2124124")
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    // Configure the view for the selected state
   }
 }

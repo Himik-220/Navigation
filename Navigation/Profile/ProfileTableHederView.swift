@@ -33,14 +33,14 @@ class ProfileTableHederView: UIView {
     label.text = "Dog"
     label.numberOfLines = 1
     label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   var statusButton: UIButton = {
     let button = UIButton()
-    button.setTitle("Show status", for: .normal)
+    button.setTitle("Set status", for: .normal)
     button.titleLabel?.textColor = .white
     button.backgroundColor = .systemBlue
     button.layer.shadowColor = UIColor.black.cgColor
@@ -54,8 +54,8 @@ class ProfileTableHederView: UIView {
   
   var signatureLabel: UILabel = {
     let label = UILabel()
-    label.text = "Waiting for something..."
     label.numberOfLines = 1
+    label.text = "Waiting for something..."
     label.font = UIFont(name: "System", size: 14)
     label.textColor = .gray
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +78,15 @@ class ProfileTableHederView: UIView {
     return view
   }()
   
+  var setStatusUITextField: UITextField = {
+    let tf = UITextField()
+    tf.borderStyle = .line
+    tf.font = UIFont(name: "System", size: 16)
+    tf.backgroundColor = .systemBackground
+    tf.translatesAutoresizingMaskIntoConstraints = false
+    return tf
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.translatesAutoresizingMaskIntoConstraints = false
@@ -85,8 +94,9 @@ class ProfileTableHederView: UIView {
     self.addSubview(nameLabel)
     self.addSubview(statusButton)
     self.addSubview(signatureLabel)
+    self.addSubview(setStatusUITextField)
     self.backgroundColor = .systemGray6
-    statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
+    statusButton.addTarget(self, action: #selector(setStatus), for: .touchUpInside)
     avatar.isUserInteractionEnabled = true
     self.avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
     statusButton.addSubview(bottomAvatarView)
@@ -101,11 +111,12 @@ class ProfileTableHederView: UIView {
     leftAvatarConstraint = avatar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16)
     topAvatarConstraint.isActive = true
     leftAvatarConstraint.isActive = true
-    centerXAvatarConstraint = avatar.centerXAnchor.constraint(equalTo: self.centerXAnchor)
   }
   
-  @objc func showStatus() {
-    print(signatureLabel.text ?? "")
+  @objc func setStatus() {
+    self.endEditing(true)
+    signatureLabel.text = setStatusUITextField.text ?? ""
+    setStatusUITextField.text = ""
   }
   
   @objc func exit() {
@@ -128,6 +139,7 @@ class ProfileTableHederView: UIView {
     widthAvatarConstraint.constant = UIScreen.main.bounds.width
     heightAvatarConstraint.constant = UIScreen.main.bounds.width
     centerYAvatarConstraint = avatar.centerYAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.centerYAnchor)
+    centerXAvatarConstraint = avatar.centerXAnchor.constraint(equalTo: self.centerXAnchor)
     topAvatarConstraint.isActive = false
     leftAvatarConstraint.isActive = false
     centerYAvatarConstraint.isActive = true
@@ -158,8 +170,13 @@ class ProfileTableHederView: UIView {
         statusButton.heightAnchor.constraint(equalToConstant: 50),
         statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
         
-        signatureLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-        signatureLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
+        setStatusUITextField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+        setStatusUITextField.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
+        setStatusUITextField.rightAnchor.constraint(equalTo: statusButton.rightAnchor),
+        
+        signatureLabel.leftAnchor.constraint(equalTo: setStatusUITextField.leftAnchor),
+        signatureLabel.bottomAnchor.constraint(equalTo: setStatusUITextField.topAnchor, constant: -16),
+        signatureLabel.rightAnchor.constraint(equalTo: statusButton.rightAnchor),
         
         bottomAvatarView.topAnchor.constraint(equalTo: avatar.bottomAnchor),
         bottomAvatarView.centerXAnchor.constraint(equalTo: avatar.centerXAnchor),
