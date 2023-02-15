@@ -62,8 +62,6 @@ class PostTableViewCell: UITableViewCell {
     image.translatesAutoresizingMaskIntoConstraints = false
     image.backgroundColor = UIColor(named: "textColor")
     
-    likesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
-    
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
       authorLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
@@ -84,10 +82,6 @@ class PostTableViewCell: UITableViewCell {
       viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),
       viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
     ])
-  }
-  
-  @objc func onTap() {
-    print("2124124")
   }
   
   required init?(coder: NSCoder) {

@@ -94,7 +94,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     if indexPath.section == 0 {
       navigationController?.pushViewController(PhotosViewController(), animated: true)
       navigationController?.navigationBar.isHidden = false
+    } else {
+      let vc = PostDetailViewController()
+      vc.postID = indexPath.row
+      navigationController?.showDetailViewController(vc, sender: nil)
     }
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
