@@ -61,6 +61,9 @@ class PostTableViewCell: UITableViewCell {
     image.contentMode = .scaleAspectFit
     image.translatesAutoresizingMaskIntoConstraints = false
     image.backgroundColor = UIColor(named: "textColor")
+    image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPost(on:))))
+    
+    likesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLikes(on:))))
     
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -82,6 +85,18 @@ class PostTableViewCell: UITableViewCell {
       viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),
       viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
     ])
+  }
+  
+  @objc func tapLikes(on index: Int) {
+    Post.postData[index].likes += 1
+  }
+  
+  @objc func tapPost(on id: Int){
+    let vc = PostDetailViewController()
+    vc.postID = id
+//    UINavigationController().showDetailViewController(vc, sender: nil)
+//    window?.rootViewController?.showDetailViewController(vc, sender: nil)
+    print("Pressed\(id)")
   }
   
   required init?(coder: NSCoder) {

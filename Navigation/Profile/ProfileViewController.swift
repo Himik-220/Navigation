@@ -25,7 +25,6 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
     swipeDown.delegate = self
     swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
-    self.tableView.addGestureRecognizer(swipeDown)
   }
   
   override func viewDidLayoutSubviews() {
@@ -77,6 +76,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       cell.likesLabel.text = "Likes: \(Post.postData[indexPath.row].likes)"
       cell.viewsLabel.text = "Views: \(Post.postData[indexPath.row].views)"
       cell.image.image = UIImage(named: Post.postData[indexPath.row].image)
+      cell.tapLikes(on: indexPath.row)
+      cell.tapPost(on: indexPath.row)
       return cell
     }
   }
@@ -94,10 +95,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     if indexPath.section == 0 {
       navigationController?.pushViewController(PhotosViewController(), animated: true)
       navigationController?.navigationBar.isHidden = false
-    } else {
-      let vc = PostDetailViewController()
-      vc.postID = indexPath.row
-      navigationController?.showDetailViewController(vc, sender: nil)
     }
     tableView.reloadData()
   }

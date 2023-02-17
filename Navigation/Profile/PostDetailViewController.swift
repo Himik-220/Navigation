@@ -16,8 +16,8 @@ class PostDetailViewController: UIViewController {
     super.viewDidLoad()
     view.addSubview(postDetailView)
     Post.postData[postID].views += 1
-    postDetailView.likesLabel.text = String(Post.postData[postID].likes)
-    postDetailView.viewsLabel.text = String(Post.postData[postID].views)
+    postDetailView.likesLabel.text = "Likes: \(Post.postData[postID].likes)"
+    postDetailView.viewsLabel.text = "Views: \(Post.postData[postID].views)"
     postDetailView.image.image = UIImage(named: Post.postData[postID].image)
     postDetailView.descriptionLabel.text = Post.postData[postID].description
     postDetailView.authorLabel.text = Post.postData[postID].author
