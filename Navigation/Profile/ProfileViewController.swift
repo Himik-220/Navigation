@@ -71,15 +71,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellID) as! PostTableViewCell
+      cell.postID = indexPath.row
       cell.authorLabel.text = Post.postData[indexPath.row].author
       cell.descriptionLabel.text = Post.postData[indexPath.row].description
       cell.likesLabel.text = "Likes: \(Post.postData[indexPath.row].likes)"
       cell.viewsLabel.text = "Views: \(Post.postData[indexPath.row].views)"
       cell.image.image = UIImage(named: Post.postData[indexPath.row].image)
-      cell.tapLikes(on: indexPath.row)
-      cell.tapPost(on: indexPath.row)
+      cell.likeButton.addTarget(self, action: #selector(tapLike), for: .touchUpInside)
       return cell
     }
+  }
+  
+  @objc func tapLike() {
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -95,6 +99,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     if indexPath.section == 0 {
       navigationController?.pushViewController(PhotosViewController(), animated: true)
       navigationController?.navigationBar.isHidden = false
+    } else {
+      let vc = PostDetailViewController()
+      vc.postID = indexPath.row
+      navigationController?.showDetailViewController(vc, sender: nil)
     }
     tableView.reloadData()
   }

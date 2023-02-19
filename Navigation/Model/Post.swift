@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post {
+struct Post{
   var author: String
   var description: String
   var image: String

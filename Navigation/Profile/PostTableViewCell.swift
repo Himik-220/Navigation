@@ -10,6 +10,7 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
   
   static let cellID = "PostCell"
+  var postID = 0
   
   let authorLabel: UILabel = {
     let label = UILabel()
@@ -48,6 +49,15 @@ class PostTableViewCell: UITableViewCell {
     return label
   }()
   
+  let likeButton: UIButton = {
+    let button = UIButton()
+    button.tintColor = UIColor(named: "textColor")
+    button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.tintColor = UIColor(named: "textColor")
+    return button
+  }()
+  
   let image = UIImageView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,13 +67,13 @@ class PostTableViewCell: UITableViewCell {
     contentView.addSubview(likesLabel)
     contentView.addSubview(viewsLabel)
     contentView.addSubview(image)
+    contentView.addSubview(likeButton)
+    
+    likeButton.addTarget(self, action: #selector(tapLikes), for: .touchUpInside)
     
     image.contentMode = .scaleAspectFit
     image.translatesAutoresizingMaskIntoConstraints = false
     image.backgroundColor = UIColor(named: "textColor")
-    image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPost(on:))))
-    
-    likesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLikes(on:))))
     
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -78,25 +88,20 @@ class PostTableViewCell: UITableViewCell {
       descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
       descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
 
-      likesLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-      likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-
+      likeButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+      likeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+      
+      likesLabel.leftAnchor.constraint(equalTo: likeButton.rightAnchor, constant: 2),
+      likesLabel.topAnchor.constraint(equalTo: likeButton.topAnchor),
+      
       viewsLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-      viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),
+      viewsLabel.topAnchor.constraint(equalTo: likeButton.topAnchor),
       viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
     ])
   }
   
-  @objc func tapLikes(on index: Int) {
-    Post.postData[index].likes += 1
-  }
-  
-  @objc func tapPost(on id: Int){
-    let vc = PostDetailViewController()
-    vc.postID = id
-//    UINavigationController().showDetailViewController(vc, sender: nil)
-//    window?.rootViewController?.showDetailViewController(vc, sender: nil)
-    print("Pressed\(id)")
+  @objc func tapLikes() {
+    Post.postData[postID].likes += 1
   }
   
   required init?(coder: NSCoder) {

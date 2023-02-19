@@ -46,6 +46,15 @@ class PostDetailUIScrollView: UIScrollView {
     return label
   }()
   
+  let likeButton: UIButton = {
+    let button = UIButton()
+    button.tintColor = UIColor(named: "textColor")
+    button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.tintColor = UIColor(named: "textColor")
+    return button
+  }()
+  
   let image = UIImageView()
   
   override init(frame: CGRect) {
@@ -56,6 +65,7 @@ class PostDetailUIScrollView: UIScrollView {
     self.addSubview(likesLabel)
     self.addSubview(viewsLabel)
     self.addSubview(image)
+    self.addSubview(likeButton)
     self.translatesAutoresizingMaskIntoConstraints = false
     
     image.contentMode = .scaleAspectFit
@@ -86,8 +96,11 @@ class PostDetailUIScrollView: UIScrollView {
         descriptionLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
         descriptionLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32),
 
-        likesLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-        likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+        likeButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+        likeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+        
+        likesLabel.leftAnchor.constraint(equalTo: likeButton.rightAnchor, constant: 2),
+        likesLabel.topAnchor.constraint(equalTo: likeButton.topAnchor),
 
         viewsLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
         viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),

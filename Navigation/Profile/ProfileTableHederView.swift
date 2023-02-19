@@ -159,7 +159,7 @@ class ProfileTableHederView: UIView {
       NSLayoutConstraint.activate([
         self.widthAnchor.constraint(equalTo: strongSuperview.safeAreaLayoutGuide.widthAnchor),
         self.centerXAnchor.constraint(equalTo: strongSuperview.centerXAnchor),
-        self.topAnchor.constraint(equalTo: strongSuperview.topAnchor),
+        self.topAnchor.constraint(equalTo: strongSuperview.safeAreaLayoutGuide.topAnchor),
         
         nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
         nameLabel.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),

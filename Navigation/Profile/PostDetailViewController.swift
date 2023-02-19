@@ -21,6 +21,12 @@ class PostDetailViewController: UIViewController {
     postDetailView.image.image = UIImage(named: Post.postData[postID].image)
     postDetailView.descriptionLabel.text = Post.postData[postID].description
     postDetailView.authorLabel.text = Post.postData[postID].author
+    postDetailView.likeButton.addTarget(self, action: #selector(tapLikes), for: .touchUpInside)
     view.backgroundColor = .systemBackground
+  }
+  
+  @objc func tapLikes() {
+    Post.postData[postID].likes += 1
+    postDetailView.likesLabel.text = "Likes: \(Post.postData[postID].likes)"
   }
 }
