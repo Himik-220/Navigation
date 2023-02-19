@@ -10,12 +10,13 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
   
   static let cellID = "PostCell"
+  var postID = 0
   
   let authorLabel: UILabel = {
     let label = UILabel()
     label.numberOfLines = 2
     label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -34,7 +35,7 @@ class PostTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 1
     label.font = UIFont(name: "System", size: 16)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -43,9 +44,18 @@ class PostTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 1
     label.font = UIFont(name: "System", size: 16)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
+  }()
+  
+  let likeButton: UIButton = {
+    let button = UIButton()
+    button.tintColor = UIColor(named: "textColor")
+    button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.tintColor = UIColor(named: "textColor")
+    return button
   }()
   
   let image = UIImageView()
@@ -57,10 +67,13 @@ class PostTableViewCell: UITableViewCell {
     contentView.addSubview(likesLabel)
     contentView.addSubview(viewsLabel)
     contentView.addSubview(image)
+    contentView.addSubview(likeButton)
+    
+    likeButton.addTarget(self, action: #selector(tapLikes), for: .touchUpInside)
     
     image.contentMode = .scaleAspectFit
     image.translatesAutoresizingMaskIntoConstraints = false
-    image.backgroundColor = .black
+    image.backgroundColor = UIColor(named: "textColor")
     
     NSLayoutConstraint.activate([
       authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -75,13 +88,20 @@ class PostTableViewCell: UITableViewCell {
       descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
       descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
 
-      likesLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-      likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-
+      likeButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+      likeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+      
+      likesLabel.leftAnchor.constraint(equalTo: likeButton.rightAnchor, constant: 2),
+      likesLabel.topAnchor.constraint(equalTo: likeButton.topAnchor),
+      
       viewsLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-      viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),
+      viewsLabel.topAnchor.constraint(equalTo: likeButton.topAnchor),
       viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
     ])
+  }
+  
+  @objc func tapLikes() {
+    Post.postData[postID].likes += 1
   }
   
   required init?(coder: NSCoder) {
@@ -90,11 +110,9 @@ class PostTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    // Configure the view for the selected state
   }
 }

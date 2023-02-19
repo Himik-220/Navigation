@@ -59,4 +59,10 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     cell.imageView.image = UIImage(named: Post.postData[indexPath.row].image)
     return cell
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let vc = PhotosDetailViewController()
+    vc.imageName = Post.postData[indexPath.row].image
+    navigationController?.showDetailViewController(vc, sender: nil)
+  }
 }

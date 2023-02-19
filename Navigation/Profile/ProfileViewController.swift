@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
   
   let tableView = UITableView()
   
@@ -17,11 +17,14 @@ class ProfileViewController: UIViewController {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     self.tableView.delegate = self
     self.tableView.dataSource = self
-    tableView.backgroundColor = .systemGray6
+    self.tableView.backgroundColor = .systemGray6
     view.backgroundColor = .systemGray6
     self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.cellID)
     self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.cellID)
     self.tableView.rowHeight = UITableView.automaticDimension
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
+    swipeDown.delegate = self
+    swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
   }
   
   override func viewDidLayoutSubviews() {
@@ -32,6 +35,19 @@ class ProfileViewController: UIViewController {
       tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
       tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    view.endEditing(true)
+    return false
+  }
+  
+  @objc func hideKeyboardOnSwipeDown() {
+    view.endEditing(true)
+  }
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
 }
 
@@ -55,13 +71,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellID) as! PostTableViewCell
+      cell.postID = indexPath.row
       cell.authorLabel.text = Post.postData[indexPath.row].author
       cell.descriptionLabel.text = Post.postData[indexPath.row].description
       cell.likesLabel.text = "Likes: \(Post.postData[indexPath.row].likes)"
       cell.viewsLabel.text = "Views: \(Post.postData[indexPath.row].views)"
       cell.image.image = UIImage(named: Post.postData[indexPath.row].image)
+      cell.likeButton.addTarget(self, action: #selector(tapLike), for: .touchUpInside)
       return cell
     }
+  }
+  
+  @objc func tapLike() {
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -77,7 +99,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     if indexPath.section == 0 {
       navigationController?.pushViewController(PhotosViewController(), animated: true)
       navigationController?.navigationBar.isHidden = false
+    } else {
+      let vc = PostDetailViewController()
+      vc.postID = indexPath.row
+      navigationController?.showDetailViewController(vc, sender: nil)
     }
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
