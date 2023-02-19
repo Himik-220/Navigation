@@ -20,7 +20,6 @@ class LogInUIScrollView: UIScrollView {
   let loginTF: UITextField = {
     let tf = UITextField()
     tf.placeholder = "Email or phone"
-    tf.textColor = .black
     tf.keyboardType = .emailAddress
     tf.font = UIFont(name: "System", size: 16)
     tf.backgroundColor = .systemGray6
@@ -35,7 +34,6 @@ class LogInUIScrollView: UIScrollView {
     let tf = UITextField()
     tf.placeholder = "password"
     tf.isSecureTextEntry = true
-    tf.textColor = .black
     tf.font = UIFont(name: "System", size: 16)
     tf.backgroundColor = .systemGray6
     tf.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +62,16 @@ class LogInUIScrollView: UIScrollView {
     return button
   }()
   
+  let passwordLimitLabel: UILabel = {
+    let label = UILabel()
+    label.text = "минимальное количество символов 6"
+    label.font = UIFont(name: "System", size: 14)
+    label.textColor = .red
+    label.isHidden = true
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.addSubview(logoImage)
@@ -71,6 +79,7 @@ class LogInUIScrollView: UIScrollView {
     self.keyboardDismissMode = .interactive
     myStackView.addSubview(loginTF)
     myStackView.addSubview(passwordTF)
+    self.addSubview(passwordLimitLabel)
     self.addSubview(logInButton)
     self.addSubview(myStackView)
   }
@@ -104,6 +113,9 @@ class LogInUIScrollView: UIScrollView {
         passwordTF.leftAnchor.constraint(equalTo: myStackView.leftAnchor),
         passwordTF.rightAnchor.constraint(equalTo: myStackView.rightAnchor),
         passwordTF.heightAnchor.constraint(equalToConstant: 50),
+        
+        passwordLimitLabel.topAnchor.constraint(equalTo: myStackView.bottomAnchor, constant: -2),
+        passwordLimitLabel.leftAnchor.constraint(equalTo: myStackView.leftAnchor),
         
         logInButton.topAnchor.constraint(equalTo: myStackView.bottomAnchor, constant: 16),
         logInButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),

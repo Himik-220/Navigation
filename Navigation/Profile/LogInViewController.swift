@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
   
   let logInView = LogInUIScrollView()
   
@@ -15,9 +15,34 @@ class LogInViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .tertiarySystemBackground
     view.addSubview(logInView)
-    logInView.logInButton.addAction(UIAction{ _ in
-      self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+    logInView.loginTF.delegate = self
+    logInView.passwordTF.delegate = self
+    logInView.logInButton.addAction(UIAction{ [self] _ in
+      if (logInView.loginTF.text != "" || logInView.passwordTF.text != "") && (logInView.loginTF.text == "Admin" || logInView.passwordTF.text == "123456"){
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+      } else {
+        let alert = UIAlertController(title: "Неверный логин или пароль", message: "Поля логина и пароля не могут быть пустыми", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
+      }
     }, for: .touchUpInside)
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
+    swipeDown.delegate = self
+    swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
+    view.addGestureRecognizer(swipeDown)
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    view.endEditing(true)
+    if textField == logInView.passwordTF {
+      if logInView.passwordTF.text?.count ?? 0 < 6 {
+        logInView.passwordLimitLabel.isHidden = false
+      } else {
+        logInView.passwordLimitLabel.isHidden = true
+      }
+      return false
+    }
+    return false
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -45,5 +70,13 @@ class LogInViewController: UIViewController {
   
   @objc func keyboardWillHide(_ notrification: NSNotification) {
     logInView.contentInset = .zero
+  }
+  
+  @objc func hideKeyboardOnSwipeDown() {
+    view.endEditing(true)
+  }
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
   }
 }

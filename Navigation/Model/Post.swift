@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Post {
+struct Post{
   var author: String
   var description: String
   var image: String
   var likes: Int
   var views: Int
   
-  static let postData = [
+  static var postData = [
     Post(author: "Abc some asa, asdasda , asdas da ,asf asfas f,asfas sfa s", description: "some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some textsome text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some textsome text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some textsome text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some textsome text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text",
          image: "one", likes: 232, views: 301),
     Post(author: "Bcd", description: "some text", image: "two", likes: 312, views: 600),

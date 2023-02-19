@@ -15,7 +15,7 @@ class FeedViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .tertiarySystemBackground
     myButton.setTitle("Post", for: .normal)
-    myButton.setTitleColor(.black, for: .normal)
+    myButton.setTitleColor(UIColor(named: "textColor"), for: .normal)
     myButton.backgroundColor = .systemBlue
     myButton.addTarget(self, action: #selector(goPost), for: .touchUpInside)
     view.addSubview(myButton)

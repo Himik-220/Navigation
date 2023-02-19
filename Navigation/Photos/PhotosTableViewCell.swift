@@ -15,7 +15,7 @@ class PhotosTableViewCell: UITableViewCell {
     let label = UILabel()
     label.numberOfLines = 1
     label.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
-    label.textColor = .black
+    label.textColor = UIColor(named: "textColor")
     label.translatesAutoresizingMaskIntoConstraints = false
     label.text = "Photos"
     return label
@@ -46,7 +46,7 @@ class PhotosTableViewCell: UITableViewCell {
     imageFour.translatesAutoresizingMaskIntoConstraints = false
     imageFour.contentMode = .scaleToFill
     imageArrow.translatesAutoresizingMaskIntoConstraints = false
-    imageArrow.tintColor = .black
+    imageArrow.tintColor = UIColor(named: "textColor")
     
     contentView.addSubview(photosLabel)
     contentView.addSubview(imageOne)
