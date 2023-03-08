@@ -70,7 +70,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellID) as! PostTableViewCell
-      cell.setupCell(with: indexPath.row)
+      cell.postID = indexPath.row
+      cell.setupCell()
       cell.likeButton.addTarget(self, action: #selector(tapLike), for: .touchUpInside)
       return cell
     }
