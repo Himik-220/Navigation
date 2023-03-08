@@ -25,7 +25,6 @@
 		7DD5EB7D299CFC0800A6A412 /* PostDetailUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5EB7C299CFC0800A6A412 /* PostDetailUIScrollView.swift */; };
 		7DD5EB7F299D03DB00A6A412 /* PhotosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5EB7E299D03DB00A6A412 /* PhotosDetailViewController.swift */; };
 		7DDB1C0F2944ACD000CA3A48 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB1C0E2944ACD000CA3A48 /* LogInViewController.swift */; };
-		7DDB1C11294503E500CA3A48 /* LogInUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB1C10294503E500CA3A48 /* LogInUIScrollView.swift */; };
 		7DDB1C132945F5B800CA3A48 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB1C122945F5B800CA3A48 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +49,6 @@
 		7DD5EB7C299CFC0800A6A412 /* PostDetailUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailUIScrollView.swift; sourceTree = "<group>"; };
 		7DD5EB7E299D03DB00A6A412 /* PhotosDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDetailViewController.swift; sourceTree = "<group>"; };
 		7DDB1C0E2944ACD000CA3A48 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		7DDB1C10294503E500CA3A48 /* LogInUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInUIScrollView.swift; sourceTree = "<group>"; };
 		7DDB1C122945F5B800CA3A48 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,7 +99,6 @@
 				7DD5EB7C299CFC0800A6A412 /* PostDetailUIScrollView.swift */,
 				7DA44780293D1E2800240D93 /* ProfileTableHederView.swift */,
 				7DDB1C0E2944ACD000CA3A48 /* LogInViewController.swift */,
-				7DDB1C10294503E500CA3A48 /* LogInUIScrollView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -220,7 +217,6 @@
 				7DCB35E429354C4F00390046 /* ProfileViewController.swift in Sources */,
 				7DCB35EA293556AD00390046 /* InfoViewController.swift in Sources */,
 				7DD5EB7F299D03DB00A6A412 /* PhotosDetailViewController.swift in Sources */,
-				7DDB1C11294503E500CA3A48 /* LogInUIScrollView.swift in Sources */,
 				7DCB35E82935545D00390046 /* Post.swift in Sources */,
 				7D2EED09295354DB00E532A6 /* PhotosTableViewCell.swift in Sources */,
 				7DCE709D2930303E0081D98E /* SceneDelegate.swift in Sources */,

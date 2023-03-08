@@ -52,7 +52,6 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-  
   func numberOfSections(in tableView: UITableView) -> Int {
     return 2
   }
@@ -72,11 +71,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellID) as! PostTableViewCell
       cell.postID = indexPath.row
-      cell.authorLabel.text = Post.postData[indexPath.row].author
-      cell.descriptionLabel.text = Post.postData[indexPath.row].description
-      cell.likesLabel.text = "Likes: \(Post.postData[indexPath.row].likes)"
-      cell.viewsLabel.text = "Views: \(Post.postData[indexPath.row].views)"
-      cell.image.image = UIImage(named: Post.postData[indexPath.row].image)
+      cell.setupCell()
       cell.likeButton.addTarget(self, action: #selector(tapLike), for: .touchUpInside)
       return cell
     }

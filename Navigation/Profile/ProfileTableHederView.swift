@@ -80,9 +80,11 @@ class ProfileTableHederView: UIView {
   
   var setStatusUITextField: UITextField = {
     let tf = UITextField()
-    tf.borderStyle = .line
     tf.font = UIFont(name: "System", size: 16)
     tf.backgroundColor = .systemBackground
+    tf.layer.cornerRadius = 8
+    tf.layer.borderColor = UIColor(named: "textColor")?.cgColor
+    tf.layer.borderWidth = 1
     tf.translatesAutoresizingMaskIntoConstraints = false
     return tf
   }()
@@ -98,6 +100,7 @@ class ProfileTableHederView: UIView {
     self.backgroundColor = .systemGray6
     statusButton.addTarget(self, action: #selector(setStatus), for: .touchUpInside)
     avatar.isUserInteractionEnabled = true
+    avatar.clipsToBounds = true
     self.avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
     statusButton.addSubview(bottomAvatarView)
     self.addSubview(exitButton)
@@ -126,6 +129,8 @@ class ProfileTableHederView: UIView {
     centerXAvatarConstraint.isActive = false
     topAvatarConstraint.isActive = true
     leftAvatarConstraint.isActive = true
+    widthAvatarConstraint.isActive = true
+    heightAvatarConstraint.isActive = true
     UIView.animate(withDuration: 0.5) {
       self.layoutIfNeeded()
       self.bottomAvatarView.alpha = 0

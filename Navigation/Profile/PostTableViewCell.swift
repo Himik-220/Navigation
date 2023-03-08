@@ -104,6 +104,14 @@ class PostTableViewCell: UITableViewCell {
     Post.postData[postID].likes += 1
   }
   
+  func setupCell() {
+    authorLabel.text = Post.postData[postID].author
+    image.image = UIImage(named: Post.postData[postID].image)
+    descriptionLabel.text = Post.postData[postID].description
+    likesLabel.text = "Likes: \(Post.postData[postID].likes)"
+    viewsLabel.text = "Views: \(Post.postData[postID].views)"
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
